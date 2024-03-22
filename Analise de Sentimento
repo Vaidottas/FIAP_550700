@@ -1,0 +1,31 @@
+def coletar_avaliacoes():
+    avaliacoes = []
+    while True:
+        avaliacao = input("Digite a avaliação ou sair: ")
+        if avaliacao.lower() == 'sair':
+            break
+        avaliacoes.append(avaliacao)
+    return avaliacoes
+
+def calcular_sentimento(avaliacao):
+    palavras = avaliacao.lower().split()
+    pontuacao = 0
+    for palavra in palavras:
+        if palavra in ['ótimo', 'excelente', 'perfeito', 'maravilhoso', 'bom', 'magnifico']:
+            pontuacao += 1
+        elif palavra in ['ruim', 'péssimo', 'terrível', 'horrível', 'podre', 'horroroso']:
+            pontuacao -= 1
+    return pontuacao
+
+def analisar_sentimento(avaliacoes):
+    for idx, avaliacao in enumerate(avaliacoes, start=1):
+        pontuacao = calcular_sentimento(avaliacao)
+        if pontuacao > 0:
+            print(f"Avaliação {idx}: Positiva")
+        elif pontuacao < 0:
+            print(f"Avaliação {idx}: Negativa")
+        else:
+            print(f"Avaliação {idx}: Neutra")
+
+avaliacoes = coletar_avaliacoes()
+analisar_sentimento(avaliacoes)
